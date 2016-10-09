@@ -1,0 +1,67 @@
+<div class="crm-container">
+  <div crm-ui-debug="members"></div>
+
+  <form name="myForm" crm-ui-id-scope>
+
+    <div class="help">
+      <p>{{ts('You can filter membership list based on start date on this page.')}}</p>
+
+      <p>{{ts('To view more debugging information, edit the URL and include "?angularDebug=1".')}}</p>
+    </div>
+
+    <div crm-ui-accordion="{title: ts('Search Criteria')}">
+      <div class="crm-block">
+        <div class="crm-group">
+          <div crm-ui-field="{name: 'myForm.start_date_from', title: ts('Start Date From')}">
+            <input
+              crm-ui-id="myForm.start_date_from"
+              name="start_date_from"
+              ng-model="members.start_date_from"
+              class="crm-form-text"
+              crm-ui-datepicker="{time: false, date: 'yy-mm-dd'}"
+              />
+          </div>
+          <div crm-ui-field="{name: 'myForm.start_date_to', title: ts('Start Date To')}">
+            <input
+              crm-ui-id="myForm.start_date_to"
+              name="start_date_to"
+              ng-model="members.start_date_to"
+              class="crm-form-text"
+              crm-ui-datepicker="{time: false, date: 'yy-mm-dd'}"
+              />
+          </div>
+          <div class="crm-section">
+            <div class="content">
+              <button ng-click="search()">{{ts('Search')}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div crm-ui-accordion="{title: ts('List of Memberships')}">
+      <table>
+        <thead>
+          <tr>
+            <td>{{ts('Name')}}</td>
+            <td>{{ts('Membership Name')}}</td>
+            <td>{{ts('Start Date')}}</td>
+            <td>{{ts('End Date')}}</td>
+            <td>{{ts('Source')}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="membership in members.values">
+            <td>{{membership["api.Contact.getsingle"]["display_name"]}}</td>
+            <td>{{membership.membership_name}}</td>
+            <td>{{membership.start_date}}</td>
+            <td>{{membership.end_date}}</td>
+            <td>{{membership.source}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </form>
+
+</div>
